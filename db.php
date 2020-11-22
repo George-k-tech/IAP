@@ -10,7 +10,7 @@
                 PDO::ATTR_DEFAULT_FETCH_MODE =>PDO::FETCH_ASSOC
             ];
             try{
-                $this->pdo=new PDO($dsn,Util::$DB_USER,Util::$DB_USER_PASS,$options);
+                $this->pdo = new PDO($dsn,Util::$DB_USER,Util::$DB_USER_PASS,$options);
             }catch(PDOException $e){
                 echo $e->getMessage();
             }

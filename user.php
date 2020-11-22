@@ -30,7 +30,7 @@
         public function getFullName(){
             return $this->fullName;
         }
-        public function swtEmail($em){
+        public function setEmail($em){
             $this->email = $em;
         }
         public function getEmail(){
@@ -61,7 +61,7 @@
             return $this->newPass;
         }
 
-        public function register ($pdo){
+        public function register ($pdo) {
 
             $file_name = $this->image['name'];
             $file_tmp_location = $this->image['tmp_name'];
@@ -70,13 +70,14 @@
             move_uploaded_file($file_tmp_location, $file_path.$file_name);
 
             try{
-                $stm = $pdo->prepare("INSERT INTO registration(name_user,Email,City,user_password,ProfilePic)VALUES(?,?,?,?,?)");
-                $stm = execute([$this->fullName,$this->email,$this->city,$this->inputPass,$file_name]);
+                $stm = $pdo->prepare("INSERT INTO registration (name_user,Email,City,user_password,ProfilePic) VALUES(?,?,?,?,?)");
+                $stm->execute([$this->fullName,$this->email,$this->city,$this->inputPass,$file_name]);
                 $stm = null;
                 return "Registration was successful";
             }catch(PDOException $ex){
                 return $ex->getMessage();
             }
+            
         }
         public function login($pdo){
             try{
